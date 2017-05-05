@@ -1,4 +1,4 @@
-# MagneTec
+## MagneTec
 
 Challenge:
 We are going to do a web-based game-esque thing. Specifically, we are going to emulate a fridge door. With poetry magnets on it. In a web browser. Over the Internet. Anyone can play.
@@ -6,7 +6,7 @@ https://img.buzzfeed.com/buzzfeed-static/static/enhanced/webdr01/2013/1/18/13/en
 # Objective:
 The idea, is to make a 2000x2000 or so pixel canvas in the browser, and on that canvas, create little draggable boxes with words in them (magnets). The text for the words and their (x,y) locations will come from a webserver, encoded in JSON format (spec to follow). When a magnet is dragged to a new location on the canvas in a client’s web browser, it’s new location is sent to the server. Clients can poll the server to get the list of words and their locations, and update with new locations as sent to the server by other clients. It ends up being a multi-user interactive fridge door with poetry magnets on it, over the web.
  
-Implementation:
+# Implementation:
 Server-side:
 I am going to provide you a simple REST API. It will be at http://vfm.sigrd.com or https://vfm.sigrd.com and data queries will only respond with JSON, not xml. More details to follow. I’ll document the API on github or something, we’ll see. Don’t wait for this API, it is really only half of the system, the other half is rendering magnets and making them movable.
 I will make sure that the server implements CORS so that your browser will touch the API without yelling at you. If you have no idea what I am talking about, don’t even worry about this bullet.
