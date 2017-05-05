@@ -47,7 +47,3 @@ You may email me or telegram me (particularly over the weekend if you are workin
 If you manage to do the whole client before you come here, I will get you to attempt to write a matching server-side REST API in PHP so you can host your own server. If you somehow manage all of that in short order, I will get you to attempt to wrap the whole thing up in a Docker container. If you simply read up on Docker for the interview, that would be bonus points regardless.
  
 Technically, you do not have to accept this challenge, you may choose to provide some other example code if you wish. We would prefer to discuss your experience with the challenge in your interview though, but we’re flexible. That said, we think you are the kind of person that would like to bite into this challenge anyway, given your resume. Any code you write for this challenge is yours of course, with the intention that you may wish to share it with everyone and anyone you like in the future, regardless of its progress or outcome. We aren’t selling any of this of course, the challenge is just a chance for you to show yourself off.
- 
-Good luck! If I’ve missed anything obvious, or anything is confusing, or you get stuck, you know how to get in touch with me now.
- 
-I’m looking forward to being in touch. Send me a test telegram if you feel like it.
