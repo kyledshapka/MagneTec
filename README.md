@@ -20,7 +20,7 @@ We are going to do a web-based game-esque thing. Specifically, we are going to e
 [jQuery](https://jquery.com/)
 
 ### IDE
-[PHPStorm](https://www.jetbrains.com/phpstorm/download/#section=windows) - IDE
+[PHPStorm](https://www.jetbrains.com/phpstorm/download/#section=windows)
 
 ## Author
 Kyle Shapka - [kyledshapka](https://github.com/kyledshapka)
