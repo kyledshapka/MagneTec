@@ -20,10 +20,10 @@ We are going to do a web-based game-esque thing. Specifically, we are going to e
 [jQuery](https://jquery.com/)
 
 ### IDE
-[PHPStorm] (https://www.jetbrains.com/phpstorm/download/#section=windows) - IDE
+[PHPStorm](https://www.jetbrains.com/phpstorm/download/#section=windows) - IDE
 
 ## Author
-Kyle Shapka - [kyledshapka](github.com/kyledshapka)
+Kyle Shapka - [kyledshapka](https://github.com/kyledshapka)
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
