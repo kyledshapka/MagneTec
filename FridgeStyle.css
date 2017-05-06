@@ -1,0 +1,14 @@
+#canvas {
+    height: 2000px;
+    width: 2000px;
+    /*overflow:scroll;*/
+}
+
+.magnet {
+    text-align: center;
+    padding: 0 20px;
+    width: auto;
+    background: #cdc5c5;
+    border: thin outset;
+    display: inline-block;
+}
