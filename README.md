@@ -4,7 +4,7 @@ Challenge:
 We are going to do a web-based game-esque thing. Specifically, we are going to emulate a fridge door. With poetry magnets on it. In a web browser. Over the Internet. Anyone can play.
 
 # Objective:
-It ends up being a multi-user interactive fridge door with poetry magnets on it, over the web.
+A multi-user interactive fridge door with poetry magnets on it, over the web.
 * Make a 2000x2000 or so pixel canvas in the browser, and on that canvas, 
 * Create little draggable boxes with words in them (magnets). 
 * The text for the words and their (x,y) locations will come from a webserver, encoded in JSON format (spec to follow).
