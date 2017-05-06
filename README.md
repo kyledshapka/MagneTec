@@ -12,8 +12,8 @@ We are going to do a web-based game-esque thing. Specifically, we are going to e
 ## Built with
 
 ### Hosting Environment
-[VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-[Vagrant](https://www.vagrantup.com/downloads.html)
+[VirtualBox](https://www.virtualbox.org/wiki/Downloads)<br>
+[Vagrant](https://www.vagrantup.com/downloads.html)<br>
 [Homestead](https://laravel.com/docs/5.4/homestead#first-steps)
 
 ### Javascript framework
