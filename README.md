@@ -34,9 +34,9 @@ A multi-user interactive fridge door with poetry magnets on it, over the web.
 * Pick a framework (I recommend Bootstrap) so that your css is uniform across all browsers
 ## Javascript
 * Pick a framework (I recommend jQuery because that is what we use here) so that
- * your scripts work across most browsers from the start
- * dealing with elements is way easier
- * dealing with AJAX requests is way easier
+  * your scripts work across most browsers from the start
+  * dealing with elements is way easier
+  * dealing with AJAX requests is way easier
 ## Compatibility
 * Make sure it works in Google Chrome and/or Mozilla Firefox. IE compatibility for this doesn’t matter.
 ## Development environment
