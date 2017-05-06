@@ -37,7 +37,7 @@ Make sure it works in Google Chrome and/or Mozilla Firefox. IE compatibility for
 Take advantage of (near) instant development environments as detailed below
 ## Git
 Use git to manage your code. Check it in periodically. Use branching if/where you deem appropriate.
- 
+# Additional details
 You can get as fancy as you like with organizing your code or you can just make flat js, the former is not expected. Please use git to manage your code, and publish it to github periodically, particularly if you want to ask me a question about something. Maybe there is a bug in the REST API, or maybe you want to know an implementation detail. Your commit history may be evaluated. Commit when it feels best during your development process.
  
 If you need to get a hosting environment up fast on your computer in order to serve your html and javascript files to your browser during development, I recommend installing Virtualbox, and Vagrant. Then use vagrant to install Homestead, a ready-to-go web development hosting box. This video explains how to set it up and how it works, if I recall correctly. Use what you like for an IDE. I used to use Aptana, an eclipse based web development IDE, but now we use PHPStorm which is an amazing IDE (there is a 30 day free trial). If you use phpstorm try putting your cursor on a function you are calling, and hit ctrl-b. Your life will change.
