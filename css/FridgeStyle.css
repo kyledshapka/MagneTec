@@ -1,0 +1,17 @@
+/* The style for the "fridge door" upon which the magnets will be moved about." */
+#door {
+    height: 2000px;
+    width: 2000px;
+    background: #77ffd4; /************TEMPORARY: FOR TESTING********************/
+}
+
+/* The style for the "magnets" that will be used to make fridge door poetry. */
+.magnet {
+    position: absolute;
+    padding: 0 20px;
+    width: auto;
+    background: #cdc5c5;
+    border: thin outset;
+    display: inline-block;
+    cursor: move;
+}

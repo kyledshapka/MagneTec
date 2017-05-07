@@ -1,19 +1,18 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="FridgeStyle.css">
+    <!-- The CSS reference that will control the layout of the UI -->
+    <link rel="stylesheet" type="text/css" href="css/FridgeStyle.css">
 
-    <!-- Utilize the Jquery library -->
+    <!-- The jQuery and jQueryUI libraries - used to make element manipulation easier (particularly Drag n'Drop) -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 
-    <script src ="magnet.js"></script>
-
+    <!-- The JavaScript file that will contain the scripts used to determine the behaviour of the UI -->
+    <script src ="js/magnet.js"></script>
 </head>
 <body>
-
-<div id="canvas">
-</div>
-
+    <!-- This is the canvas which will simulate a "fridge door" upon which we will generate and manipulate magnets -->
+    <div id="door"></div>
 </body>
 </html>
