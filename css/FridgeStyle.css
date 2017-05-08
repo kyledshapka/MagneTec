@@ -1,17 +1,49 @@
-/* The style for the "fridge door" upon which the magnets will be moved about." */
+/* The style for the decorative banner at the top of the screen */
+#banner{
+    height: 100px;
+    width: 2000px;
+    background: darkorange;
+    border: thick orange outset;
+    border-radius: 50px;
+}
+
+/* The style for the button which allows clients to check the list of words on the server and their locations. */
+#pollButton {
+    height: 100px;
+    padding: 0 20px;
+    width: auto;
+    background: #ff921a;
+    border: thin orange inset;
+    font-size: 30px;
+    color:white;
+    font-family: serif;
+    border-radius: 50px;
+    align-content: space-around;
+    cursor: help;
+}
+#pollButton:hover {
+    border: thin orange outset;
+    background: #ff6921;
+}
+
+/* The style for the "fridge door" upon which the magnets will be moved about. */
 #door {
     height: 2000px;
     width: 2000px;
-    background: ghostwhite; /************TEMPORARY: FOR TESTING********************/
+    background: white;
 }
 
 /* The style for the "magnets" that will be used to make fridge door poetry. */
 .magnet {
     position: absolute;
-    padding: 0 20px;
+    padding: 20px 20px;
     width: auto;
-    background: #cd8b1f;
-    border: thick #bb7720 outset;
+    background: darkorange;
+    border: thick orange outset;
     display: inline-block;
     cursor: move;
+    color:white;
+    font-family: serif;
+    font-size: 50px;
+    border-radius: 25px;
 }

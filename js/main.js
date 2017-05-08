@@ -1,74 +1,92 @@
 $(function() {
-    var $door = $('#door');
+    // The URL of the server which will store the magnets
     var $root = "http://rest.learncode.academy/api/magneTec/magnet"; // http://vfm.sigrd.com or https://vfm.sigrd.com
-    // var $poot = "test/test.json"; // this is just initializing some magnets for testing.
+    var $poot = "test/test.json"; // Useful for initializing some magnets during testing when server has been cleared.
 
-    /* Create a div of class "magnet" from an input magnet object which includes: id, word, x and y location.
-    * Magnet divs are draggable and include an event listener for when they are dropped.
-    * Finally, add the magnet to the #door div, which serves as our canvas and represents the fridge door. */
-    function addMagnet(magnet){
-        var $magnet = $('<div id = ' + magnet.id + ' class = "magnet">' + magnet.word + '</div>');
-        var $y = parseInt(magnet.y);
-        var $x = parseInt(magnet.x);
-        $magnet.css({id: magnet.id, top: $y, left: $x, position: 'absolute'});
+    // Populate the local door from the API.
+    $(function(){
+        getMagnets();
+    });
 
-        // Make the magnet into a draggable object and give it an event listener for being dropped.
-        $magnet.draggable({
-            stop: function( event, ui) {},
-            containment: "parent",
-            scroll: false,
-            stack: ".magnet"
+    // Displays the list of words and their locations when the poll button is clicked.
+    $("#pollButton").click(function(){
+        var result = [];
+        $.get($root, function(data){
+            $.each(data, function(index, magnet){
+                var $word = magnet.word;
+                var $y = magnet.y;
+                var $x = magnet.x;
+                var $id = magnet.id;
+                var $entry = ("(" + $x + ", " + $y + ") : " + $word + "\n\n");
+                result.push($entry);
+            });
+            alert("The following are stored on the server along with their (x,y) locations:\n\n" + result.join(""));
         });
+    });
 
-        // Add the magnet onto the fridge door.
-        $door.append($magnet);
+
+    /******************************************************************************************************************
+     * Requests the list of magnets from the server and places them in the appropriate location on the "fridge door". *
+     *****************************************************************************************************************/
+    timer = setInterval( getMagnets, 5000);
+    function getMagnets(){
+        $("#door").empty();
+        $.get($root, function(data){
+            $.each(data, function(index, magnet){
+                var $magnet = $('<div id = ' + magnet.id + ' class = "magnet">' + magnet.word + '</div>');
+                var $y = parseInt(magnet.y);
+                var $x = parseInt(magnet.x);
+                $magnet.css({id: magnet.id, top: $y, left: $x, position: 'absolute'});
+
+                // Make the magnet into a draggable object and give it an event listener for being dropped.
+                $magnet.draggable({
+                    start: function(event, ui) {},
+                    stop: function( event, ui ) {},
+                    containment: "parent",
+                    scroll: false,
+                    stack: ".magnet"
+                });
+                $magnet.on("dragstart", function(event, ui) {
+                    clearInterval(timer);
+                });
+                $magnet.on("dragstop", function( event, ui) {
+                    timer = setInterval( getMagnets, 5000);
+                    sendMagnet($magnet);
+                });
+                console.log($magnet); // for testing
+                $("#door").append($magnet);
+            });
+        });
     }
-    // Ask the API for a list of the magnets with their words and locations.
-    $.ajax({
-            type: 'GET',
-            url: $root,
-            success: function(magnets) {
-                // Add all of the magnets to the fridge door.
-                $.each(magnets, function(index, magnet) {
-                    addMagnet(magnet);
-                });
 
-                // Record the magnet as an object appropriate for posting to the API
-                $('.magnet').on("dragstop", function(event, ui){
-                    var magnet = $ ( this );
-                    var $id = magnet.attr("id");
-                    var $word = magnet.text();
-                    var xLoc = magnet.position().left;
-                    var yLoc = magnet.position().top;
-                    // The completed object
-                    var magnetObject = {
-                        word: $word,
-                        x: xLoc,
-                        y: yLoc,
-                        id: $id
-                    };
 
-                    // Post that magnet data to the API
-                    $.ajax({
-                        type: 'PUT',
-                        data: magnetObject,
-                        url: $root + "/" + $id,
-                        success: function(){
-                            console.log( $word + " | x: " + xLoc + ", y: " + yLoc ); // TESTING
-                        },
-                        error: function(){
-                            alert('error moving magnet on server')
-                        }
-                    });
-                });
+    /*******************************************************************
+     * Updates the server copy of a magnet from the local information. *
+     ******************************************************************/
+    function sendMagnet(magnet) {
+        var $id = magnet.attr("id");
+        var $word = magnet.text();
+        var xLoc = magnet.position().left;
+        var yLoc = magnet.position().top;
+        // The completed object
+        var magnetObject = {
+            word: $word,
+            x: xLoc,
+            y: yLoc,
+            id: $id
+        };
+
+        // Post that magnet data to the API
+        $.ajax({
+            type: 'PUT',
+            data: magnetObject,
+            url: $root + "/" + $id,
+            success: function(){
+                console.log( $word + " | x: " + xLoc + ", y: " + yLoc ); // TESTING
             },
             error: function(){
-                alert('error getting magnets');
+                alert('error moving magnet on server')
             }
-    });
+        });
+    }
 });
-
-
-
-
-
