@@ -2,7 +2,7 @@
 #door {
     height: 2000px;
     width: 2000px;
-    background: #77ffd4; /************TEMPORARY: FOR TESTING********************/
+    background: ghostwhite; /************TEMPORARY: FOR TESTING********************/
 }
 
 /* The style for the "magnets" that will be used to make fridge door poetry. */
@@ -10,8 +10,8 @@
     position: absolute;
     padding: 0 20px;
     width: auto;
-    background: #cdc5c5;
-    border: thin outset;
+    background: #cd8b1f;
+    border: thick #bb7720 outset;
     display: inline-block;
     cursor: move;
 }
