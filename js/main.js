@@ -19,7 +19,9 @@ $( function() {
                 var magnet = ( text + " : (" + x + ", " + y + ")\n\n" );
                 magnetList.push( magnet );
             });
+
             alert( "The words on the server along with their (x,y) locations:\n\n" + magnetList.join( "" ) );
+
         });
     });
 });
