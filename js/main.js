@@ -2,20 +2,7 @@ $( function() {
     var apiUrl = "http://vfm.sigrd.com/api/fridges";
     var fridgeName = "alpha";
     var fridgeUrl = apiUrl + "/" + fridgeName;
-/*
-    $.ajax({
-        type: 'PUT',
-        data: {},//{ "x":30, "y":30 },
-        dataType: "json",
-        url: "http://vfm.sigrd.com/api/fridges/alpha/word/1",
-        success: function( response ){
-            console.log( response );
-        },
-        error: function(){
-            alert('error moving magnet on server')
-        }
-    });
-*/
+
     // Get the magnets from the named fridge.
     getMagnets( fridgeUrl, fridgeName );
 
@@ -51,7 +38,7 @@ $( function() {
         var sinceUrl = wordsUrl + "?since=" + $timestamp;
         var updateInterval = 2000; // How often the magnet locations should be checked.
 
-        setInterval( function () {
+    //    setInterval( function () {
             $.ajax({
                 type: 'GET',
                 url: sinceUrl,//wordsUrl,
@@ -71,7 +58,7 @@ $( function() {
                     alert( "Error accessing " + fridgeName + " at " + fridgeUrl )
                 }
             });
-        }, updateInterval);
+      //  }, updateInterval);
 
     }
 
@@ -149,13 +136,9 @@ $( function() {
         var magnetObject = { "x":$x, "y":$y };
         var magnetUrl = fridgeUrl + "/word/" + $id;
 
-        //console.log( magnetUrl + "\n" + $id + " | " + $text + " @ " + magnetObject.x + "," + magnetObject.y ); // TEST
-        //console.log (magnetObject.x);
         $.ajax({
             type: 'PUT',
-            //data: magnetObject,
-            data: { "x":234, "y":345 },
-            dataType: "json",
+            data: JSON.stringify( magnetObject ),
             url: magnetUrl,
             success: function(data){
                 console.log( magnetUrl + "\n" + $text + " @ " + magnetObject.x + "," + magnetObject.y );
