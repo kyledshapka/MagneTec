@@ -3,8 +3,25 @@ $( function() {
     var fridgeName = "alpha";
     var fridgeUrl = apiUrl + "/" + fridgeName;
 
-    // Get the magnets from the named fridge
-    getMagnets ( fridgeUrl, fridgeName );
+    // Get the magnets from the named fridge.
+    getMagnets( fridgeUrl, fridgeName );
+
+    // When the button is pressed, ask the server for a list of the magnets and their locations, then display it.
+    $("#pollButton").click(function () {
+        var magnetList = [];
+        $.get( fridgeUrl + "/words", function ( fridge ) {
+            console.log( fridge );
+            $.each( fridge.words.list, function ( index, word ) {
+                var text = word.txt,
+                    y = word.y,
+                    x = word.x;
+
+                var magnet = ( text + " : (" + x + ", " + y + ")\n\n" );
+                magnetList.push( magnet );
+            });
+            alert( "The words on the server along with their (x,y) locations:\n\n" + magnetList.join( "" ) );
+        });
+    });
 });
 
 /*************
@@ -16,22 +33,27 @@ $( function() {
      *****************************************************************************************************/
     function getMagnets( fridgeUrl, fridgeName ) {
         var wordsUrl = fridgeUrl + "/words";
+        var $timestamp = 0;
+        var sinceUrl = wordsUrl + "?since=" + $timestamp;
         var updateInterval = 2000; // How often the magnet locations should be checked.
 
         setInterval( function () {
-            $( "#door" ).empty();
+            //$( "#door" ).empty(); // MIGHT NEED THIS INSIDE SUCCESS FUNCTION ONCE WE CAN PUT TO THE SERVER!!!!!!!!!!!!
             $.ajax({
                 type: 'GET',
-                url: wordsUrl,
+                url: sinceUrl,//wordsUrl,
                 success: function( fridge ){
-
                     var words = fridge.words;
-                    drawWords( words, fridgeUrl );
 
+                    // Only redraw the magnets only if the information on the server has been updated.
+                    if ( words.updated_at > $timestamp ) {
+                        $timestamp = words.updated_at;
+                        drawWords( words, fridgeUrl );
+                    }
                 },
                 // Alert the user if the fridge cannot be reached
                 error: function(){
-                    alert( "Error accessing " + fridgeName + " at " + apiUrl )
+                    alert( "Error accessing " + fridgeName + " at " + fridgeUrl )
                 }
             });
         }, updateInterval);
