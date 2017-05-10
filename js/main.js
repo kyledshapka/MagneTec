@@ -2,7 +2,20 @@ $( function() {
     var apiUrl = "http://vfm.sigrd.com/api/fridges";
     var fridgeName = "alpha";
     var fridgeUrl = apiUrl + "/" + fridgeName;
-
+/*
+    $.ajax({
+        type: 'PUT',
+        data: {},//{ "x":30, "y":30 },
+        dataType: "json",
+        url: "http://vfm.sigrd.com/api/fridges/alpha/word/1",
+        success: function( response ){
+            console.log( response );
+        },
+        error: function(){
+            alert('error moving magnet on server')
+        }
+    });
+*/
     // Get the magnets from the named fridge.
     getMagnets( fridgeUrl, fridgeName );
 
@@ -10,7 +23,6 @@ $( function() {
     $("#pollButton").click(function () {
         var magnetList = [];
         $.get( fridgeUrl + "/words", function ( fridge ) {
-            console.log( fridge );
             $.each( fridge.words.list, function ( index, word ) {
                 var text = word.txt,
                     y = word.y,
@@ -40,15 +52,16 @@ $( function() {
         var updateInterval = 2000; // How often the magnet locations should be checked.
 
         setInterval( function () {
-            //$( "#door" ).empty(); // MIGHT NEED THIS INSIDE SUCCESS FUNCTION ONCE WE CAN PUT TO THE SERVER!!!!!!!!!!!!
             $.ajax({
                 type: 'GET',
                 url: sinceUrl,//wordsUrl,
                 success: function( fridge ){
+
                     var words = fridge.words;
 
                     // Only redraw the magnets only if the information on the server has been updated.
                     if ( words.updated_at > $timestamp ) {
+                        $( "#door" ).empty();
                         $timestamp = words.updated_at;
                         drawWords( words, fridgeUrl );
                     }
@@ -135,14 +148,17 @@ $( function() {
             $y = magnet.position().top;
         var magnetObject = { "x":$x, "y":$y };
         var magnetUrl = fridgeUrl + "/word/" + $id;
-        console.log( fridgeUrl + "\n" + $id + " | " + $text + " @ " + $x + "," + $y ); // TEST
 
+        //console.log( magnetUrl + "\n" + $id + " | " + $text + " @ " + magnetObject.x + "," + magnetObject.y ); // TEST
+        //console.log (magnetObject.x);
         $.ajax({
             type: 'PUT',
-            data: magnetObject,
+            //data: magnetObject,
+            data: { "x":234, "y":345 },
+            dataType: "json",
             url: magnetUrl,
-            success: function(){
-
+            success: function(data){
+                console.log( magnetUrl + "\n" + $text + " @ " + magnetObject.x + "," + magnetObject.y );
             },
             error: function(){
                 alert('error moving magnet on server')
