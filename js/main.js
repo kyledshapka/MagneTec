@@ -37,27 +37,31 @@ $( function() {
         var $timestamp = 0;
         var sinceUrl = wordsUrl + "?since=" + $timestamp;
         var updateInterval = 2000;
+        paused = false;
 
         setInterval( function () {
-            $.ajax({
-                type: 'GET',
-                url: sinceUrl,//wordsUrl,
-                success: function( fridge ){
+            if (!paused){
+                $.ajax({
+                    type: 'GET',
+                    url: sinceUrl,//wordsUrl,
+                    success: function( fridge ){
 
-                    var words = fridge.words;
+                        var words = fridge.words;
 
-                    // Only redraw the magnets if the information on the server has been updated.
-                    if ( words.updated_at > $timestamp ) {
-                        $( "#door" ).empty();
-                        $timestamp = words.updated_at;
-                        drawWords( words, fridgeUrl );
+                        // Only redraw the magnets if the information on the server has been updated.
+                        if ( words.updated_at > $timestamp ) {
+                            $( "#door" ).empty();
+                            $timestamp = words.updated_at;
+                            drawWords( words, fridgeUrl );
+                        }
+                    },
+                    // Alert the user if the fridge cannot be reached
+                    error: function(){
+                        alert( "Error accessing " + fridgeName + " at " + fridgeUrl )
                     }
-                },
-                // Alert the user if the fridge cannot be reached
-                error: function(){
-                    alert( "Error accessing " + fridgeName + " at " + fridgeUrl )
-                }
-            });
+                });
+            }
+
         }, updateInterval);
 
     }
@@ -113,11 +117,13 @@ $( function() {
         // Pause updating locally while a magnet is being dragged
         magnet.on( "dragstart", function() {
             // DO SOMETHING (future implementation - pause updating while this magnet is being dragged)
+            paused = true;
         });
 
         // Update the server after a magnet has been moved
         magnet.on( "dragstop", function() {
             sendMagnet( $(this), fridgeUrl );
+            paused = false;
         });
     }
 
