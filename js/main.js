@@ -36,9 +36,9 @@ $( function() {
         var wordsUrl = fridgeUrl + "/words";
         var $timestamp = 0;
         var sinceUrl = wordsUrl + "?since=" + $timestamp;
-        var updateInterval = 2000; // How often the magnet locations should be checked.
+        var updateInterval = 2000;
 
-    //    setInterval( function () {
+        setInterval( function () {
             $.ajax({
                 type: 'GET',
                 url: sinceUrl,//wordsUrl,
@@ -46,7 +46,7 @@ $( function() {
 
                     var words = fridge.words;
 
-                    // Only redraw the magnets only if the information on the server has been updated.
+                    // Only redraw the magnets if the information on the server has been updated.
                     if ( words.updated_at > $timestamp ) {
                         $( "#door" ).empty();
                         $timestamp = words.updated_at;
@@ -58,7 +58,7 @@ $( function() {
                     alert( "Error accessing " + fridgeName + " at " + fridgeUrl )
                 }
             });
-      //  }, updateInterval);
+        }, updateInterval);
 
     }
 
@@ -117,7 +117,6 @@ $( function() {
 
         // Update the server after a magnet has been moved
         magnet.on( "dragstop", function() {
-
             sendMagnet( $(this), fridgeUrl );
         });
     }
@@ -129,8 +128,7 @@ $( function() {
     * to http://vfm.sigrd.com/api/fridges/word/<wordID>         *
     ************************************************************/
     function sendMagnet( magnet, fridgeUrl ) {
-        var $id = magnet.attr("id"),
-            $text = magnet.text(),
+        var $id = magnet.attr( "id" ),
             $x = magnet.position().left,
             $y = magnet.position().top;
         var magnetObject = { "x":$x, "y":$y };
@@ -140,8 +138,8 @@ $( function() {
             type: 'PUT',
             data: JSON.stringify( magnetObject ),
             url: magnetUrl,
-            success: function(data){
-                console.log( magnetUrl + "\n" + $text + " @ " + magnetObject.x + "," + magnetObject.y );
+            success: function(){
+                //console.log( magnetUrl + "\n" + " @ " + magnetObject.x + "," + magnetObject.y ); // For Debug
             },
             error: function(){
                 alert('error moving magnet on server')
